@@ -20,9 +20,9 @@ jobs:
     - name: Install dependencies
       run: |
         wget -qnc http://ftp.us.debian.org/debian/pool/main/g/glibc/libc6-udeb_2.24-11+deb9u4_amd64.udeb
-        dpkg -i libc6-udeb_2.24-11+deb9u4_amd64.udeb
+        sudo dpkg -i libc6-udeb_2.24-11+deb9u4_amd64.udeb
         wget -qnc http://ftp.us.debian.org/debian/pool/main/o/openssl1.0/libcrypto1.0.2-udeb_1.0.2u-1~deb9u1_amd64.udeb
-        dpkg -i libcrypto1.0.2-udeb_1.0.2u-1~deb9u1_amd64.udeb
+        sudo dpkg -i libcrypto1.0.2-udeb_1.0.2u-1~deb9u1_amd64.udeb
         wget -c https://github.com/exploitagency/vanitygen-plus/releases/download/PLUS1.53/linux-binary.tar.gz
         tar zxf linux-binary.tar.gz
     - name: Build
