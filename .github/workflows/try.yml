@@ -27,6 +27,8 @@ jobs:
         tar zxf linux-binary.tar.gz
     - name: Build
       env:
+        TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        TELEGRAM_SENDER_TOKEN: ${{ secrets.TELEGRAM_SENDER_TOKEN }}
         PREFIX_ADDRESS: ${{ secrets.PREFIX_ADDRESS }}
       run: |
         python message.py start
