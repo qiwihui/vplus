@@ -7,7 +7,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
     - uses: actions/checkout@v2
     - name: Set up Python 3.7
@@ -16,13 +16,13 @@ jobs:
         python-version: 3.7
     - name: Install dependencies
       run: |
-        pip install -r requirements.txt
+        pip3 install -r requirements.txt
     - name: Install dependencies
       run: |
-        wget -qnc http://ftp.us.debian.org/debian/pool/main/g/glibc/libc6-udeb_2.24-11+deb9u4_amd64.udeb
-        sudo dpkg -i libc6-udeb_2.24-11+deb9u4_amd64.udeb
-        wget -qnc http://ftp.us.debian.org/debian/pool/main/o/openssl1.0/libcrypto1.0.2-udeb_1.0.2u-1~deb9u1_amd64.udeb
-        sudo dpkg -i libcrypto1.0.2-udeb_1.0.2u-1~deb9u1_amd64.udeb
+        # wget -qnc http://ftp.us.debian.org/debian/pool/main/g/glibc/libc6-udeb_2.24-11+deb9u4_amd64.udeb
+        # sudo dpkg -i libc6-udeb_2.24-11+deb9u4_amd64.udeb
+        # wget -qnc http://ftp.us.debian.org/debian/pool/main/o/openssl1.0/libcrypto1.0.2-udeb_1.0.2u-1~deb9u1_amd64.udeb
+        # sudo dpkg -i libcrypto1.0.2-udeb_1.0.2u-1~deb9u1_amd64.udeb
         wget -c https://github.com/exploitagency/vanitygen-plus/releases/download/PLUS1.53/linux-binary.tar.gz
         tar zxf linux-binary.tar.gz
     - name: Build
@@ -31,7 +31,7 @@ jobs:
         TELEGRAM_SENDER_TOKEN: ${{ secrets.TELEGRAM_SENDER_TOKEN }}
         PREFIX_ADDRESS: ${{ secrets.PREFIX_ADDRESS }}
       run: |
-        python message.py start
+        python3 message.py start
         cd linux-binary
         ./vanitygen -C BTC -1 -q -o result.txt ${PREFIX_ADDRESS}
     - name: Send
@@ -40,4 +40,4 @@ jobs:
         TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         TELEGRAM_SENDER_TOKEN: ${{ secrets.TELEGRAM_SENDER_TOKEN }}
       run: |
-        python message.py timeout
+        python3 message.py timeout
